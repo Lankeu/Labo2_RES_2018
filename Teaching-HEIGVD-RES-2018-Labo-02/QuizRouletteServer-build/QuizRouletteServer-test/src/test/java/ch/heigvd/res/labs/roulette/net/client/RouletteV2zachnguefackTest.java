@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.heigvd.res.labs.roulette.net.client;
 import ch.heigvd.res.labs.roulette.net.protocol.RouletteV2Protocol;
 import ch.heigvd.schoolpulse.TestAuthor;
@@ -27,7 +22,7 @@ public class RouletteV2zachnguefackTest {
     public EphemeralClientServerPair roulettePair = new EphemeralClientServerPair(RouletteV2Protocol.VERSION);
 
     @Test
-    @TestAuthor(githubId = "zachnguefack")
+    @TestAuthor(githubId = {"zachnguefack", "Lankeu"})
     public void theTestRouletteServerShouldRunDuringTests() throws IOException {
         assertTrue(roulettePair.getServer().isRunning());
     }
@@ -37,9 +32,21 @@ public class RouletteV2zachnguefackTest {
     public void theTestRouletteClientShouldBeConnectedWhenATestStarts() throws IOException {
         assertTrue(roulettePair.getClient().isConnected());
     }
+    
+      @Test
+    @TestAuthor(githubId = {"zachnguefack", "Lankeu"})
+    public void theServerShouldGiveTheCorrectProtocolVersion() throws IOException{
+        RouletteV2ClientImpl client = new RouletteV2ClientImpl();
+         try {
+            client.connect("HackRes2018.ch", roulettePair.server.getPort());
+        } catch (IOException ex) {
+            Logger.getLogger(RouletteV2zachnguefackTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        assertEquals(client.getProtocolVersion(), RouletteV2Protocol.VERSION);   
+    }
 
     @Test
-    @TestAuthor(githubId = "zachnguefack")
+    @TestAuthor(githubId = {"zachnguefack", "Lankeu"})
     public void itShouldBePossibleForARouletteClientToConnectToARouletteServer() throws Exception {
         int port = roulettePair.getServer().getPort();
         IRouletteV2Client client = new RouletteV2ClientImpl();
@@ -49,13 +56,13 @@ public class RouletteV2zachnguefackTest {
     }
 
     @Test
-    @TestAuthor(githubId = "zachnguefack")
+    @TestAuthor(githubId = {"zachnguefack", "Lankeu"})
     public void theServerShouldReturnTheCorrectVersionNumber() throws IOException {
         assertEquals(RouletteV2Protocol.VERSION, roulettePair.getClient().getProtocolVersion());
     }
 
     @Test
-    @TestAuthor(githubId = "zachnguefack")
+   @TestAuthor(githubId = {"zachnguefack", "Lankeu"})
     public void theServerShouldHaveZeroStudentsAtStart() throws IOException {
         int port = roulettePair.getServer().getPort();
         IRouletteV2Client client = new RouletteV2ClientImpl();
@@ -65,13 +72,13 @@ public class RouletteV2zachnguefackTest {
     }
 
     @Test
-    @TestAuthor(githubId = {"zachnguefack", "SoftEng-HEIGVD"})
+    @TestAuthor(githubId = {"zachnguefack", "Lankeu"})
     public void theServerShouldStillHaveZeroStudentsAtStart() throws IOException {
         assertEquals(0, roulettePair.getClient().getNumberOfStudents());
     }
 
     @Test
-    @TestAuthor(githubId = "SoftEng-HEIGVD")
+    @TestAuthor(githubId = {"zachnguefack", "Lankeu"})
     public void theServerShouldCountStudents() throws IOException {
         IRouletteV2Client client = (IRouletteV2Client) roulettePair.getClient();
         assertEquals(0, client.getNumberOfStudents());
@@ -84,6 +91,7 @@ public class RouletteV2zachnguefackTest {
     }
 
     @Test
+    @TestAuthor(githubId = {"zachnguefack", "Lankeu"})
     public void theShouldNothaveAnyStudentsStoreAfterClearCommand() throws IOException {
         IRouletteV2Client client = (IRouletteV2Client) roulettePair.getClient();
         client.loadStudent("Zacharie");
@@ -94,6 +102,7 @@ public class RouletteV2zachnguefackTest {
     }
 
     @Test
+    @TestAuthor(githubId = {"zachnguefack", "Lankeu"})
     public void theClientMustConnectToTheRightServer() {
         RouletteV2ClientImpl client = new RouletteV2ClientImpl();
         try {
